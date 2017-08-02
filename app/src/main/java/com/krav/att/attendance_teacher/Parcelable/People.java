@@ -1,4 +1,4 @@
-package com.krav.att.attendance_teacher.Objects;
+package com.krav.att.attendance_teacher.Parcelable;
 
 import android.os.Parcel;
 import android.os.Parcelable;

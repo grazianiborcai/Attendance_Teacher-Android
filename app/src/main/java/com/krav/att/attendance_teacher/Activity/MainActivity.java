@@ -2,7 +2,6 @@ package com.krav.att.attendance_teacher.Activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,12 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.krav.att.attendance_teacher.Objects.People;
 import com.krav.att.attendance_teacher.R;
-import com.krav.att.attendance_teacher.Requests.AsyncTask.HttpRequestTask;
 import com.krav.att.attendance_teacher.Shared.UserDataShared;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -62,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         TextView email = (TextView) v.findViewById(R.id.client_email);
         UserDataShared user = UserDataShared.carregar(this);
         name.setText(user.getName());
-        email.setText(user.getEmail());
+        email.setText(user.getoAuth());
     }
 
     @Override

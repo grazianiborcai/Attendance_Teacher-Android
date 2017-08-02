@@ -1,6 +1,6 @@
 package com.krav.att.attendance_teacher.Requests.FragmentRequest;
 
-import com.krav.att.attendance_teacher.Objects.People;
+import com.krav.att.attendance_teacher.Parcelable.People;
 import com.krav.att.attendance_teacher.Requests.FragmentRequestMaster.RequestFragment;
 import com.krav.att.attendance_teacher.Requests.Interface.OnTaskFinished;
 import com.krav.att.attendance_teacher.Requests.Util.HTTPMethodEnum;

@@ -48,7 +48,7 @@ import android.widget.Toast;
 
 import com.krav.att.attendance_teacher.Authentication.AttAccountGeneral;
 import com.krav.att.attendance_teacher.Authentication.AttAccountManagerHelper;
-import com.krav.att.attendance_teacher.Objects.People;
+import com.krav.att.attendance_teacher.Parcelable.People;
 import com.krav.att.attendance_teacher.R;
 import com.krav.att.attendance_teacher.Requests.AsyncTask.HttpRequestTask;
 import com.krav.att.attendance_teacher.Requests.FragmentRequest.LoginRequestFragment;
@@ -665,9 +665,37 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             ArrayList<People> pList = intent.getParcelableArrayListExtra(HttpRequestTask.RESULTS);
             People userData = pList.get(0);
             UserDataShared obj = UserDataShared.carregar(this);
+            obj.setPeopleID(userData.getPeopleID());
+            obj.setCountryID(userData.getCountryID());
             obj.setName(userData.getName());
+            obj.setBirthDate(userData.getBirthDate());
+            obj.setEnrollmentNumber(userData.getEnrollmentNumber());
+            obj.setGradeDate(userData.getGradeDate());
             obj.setEmail(userData.getEmail());
-            obj.setPasswordSHA256(userData.getPassword());
+            obj.setCelphone(userData.getCelphone());
+            obj.setPhone(userData.getPhone());
+            obj.setAddress1(userData.getAddress1());
+            obj.setAddress2(userData.getAddress2());
+            obj.setPostalCode(userData.getPostalCode());
+            obj.setBloodType(userData.getBloodType());
+            obj.setAllergy(userData.getAllergy());
+            obj.setAllergyDesc(userData.getAllergyDesc());
+            obj.setNextGradeExam(userData.getNextGradeExam());
+            obj.setWhereOther(userData.getWhereOther());
+            obj.setLookingOther(userData.getLookingOther());
+            obj.setPassword(userData.getPassword());
+            obj.setEnrTypeID(userData.getEnrTypeID());
+            obj.setoAuth(userData.getoAuth());
+            obj.setoAuthDate(userData.getoAuthDate());
+            obj.setUserAgent(userData.getUserAgent());
+            obj.setRegionID(userData.getRegionID());
+            obj.setGradeID(userData.getGradeID());
+            obj.setBirthDateS(userData.getBirthDateS());
+            obj.setGradeDateS(userData.getGradeDateS());
+            obj.setNextGradeExamS(userData.getNextGradeExamS());
+            obj.setGenderID(userData.getGenderID());
+            obj.setWhereID(userData.getWhereID());
+            obj.setLookID(userData.getLookID());
             obj.save(this);
         } catch (Exception e) {}
     }
