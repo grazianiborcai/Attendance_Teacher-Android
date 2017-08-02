@@ -377,8 +377,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //        mFbSignInButton.setVisibility(View.GONE);
 //        mGpSignInButton.setVisibility(View.GONE);
         mCreateAccount.setVisibility(View.GONE);*/
-        /*mImageView.clearAnimation();
-        mImageView.setVisibility(View.GONE);*/
+        mImageView.clearAnimation();
+        mImageView.setVisibility(View.GONE);
         parameter = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         /*parameter.addRule(RelativeLayout.ABOVE, R.id.create_account_button);*/
