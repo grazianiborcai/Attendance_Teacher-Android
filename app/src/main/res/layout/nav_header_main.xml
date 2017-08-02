@@ -12,7 +12,7 @@
     <ImageView android:layout_width="72dp" android:layout_height="72dp"
                android:paddingTop="@dimen/nav_header_vertical_spacing"
                android:adjustViewBounds="true"
-               android:src="@drawable/ic_content_mind5_115dp" android:id="@+id/imageView" />
+               android:src="@drawable/profile_004" android:id="@+id/imageView" />
 
     <TextView android:id="@+id/client_name" android:layout_width="match_parent" android:layout_height="wrap_content"
               android:paddingTop="@dimen/nav_header_vertical_spacing" android:text="Android Studio"
