@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:id="@+id/progress"
+        android:background="@color/semitransparent"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            style="?android:attr/progressBarStyleLargeInverse"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/app_bar_fragment" />
+
+        <ScrollView
+            android:id="@+id/scroll_form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/activity_horizontal_margin2"
+                    android:paddingRight="@dimen/activity_horizontal_margin2"
+                    android:layout_height="?attr/actionBarSize">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_credit_card_grey600_24dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:paddingLeft="24dp"
+                        android:text="@string/cardDetails"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:id="@+id/register_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:layout_marginTop="24dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin2"
+                    android:paddingRight="@dimen/activity_horizontal_margin2">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        app:hintTextAppearance="@style/grayFloatingLabel"
+                        android:layout_height="wrap_content">
+
+                        <com.mind5.microcity.agenda.objects.view.BackAwareEditText
+                            android:id="@+id/edtName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/nameAsOnCard"
+                            android:maxLength="40"
+                            android:textCursorDrawable="@drawable/graycursor"
+                            android:inputType="textCapCharacters"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:imeOptions="actionNext" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtCard"
+                            app:hintTextAppearance="@style/grayFloatingLabel"
+                            android:layout_marginTop="@dimen/space">
+
+                            <com.mind5.microcity.agenda.objects.view.BackAwareEditText
+                                android:id="@+id/edtCardNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/cardNumber"
+                                android:textCursorDrawable="@drawable/graycursor"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:maxLength="19"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imgCard"
+                            android:layout_alignRight="@+id/txtCard"
+                            android:layout_alignBottom="@+id/txtCard"
+                            android:paddingBottom="14dp"
+                            android:src="@drawable/card_amex_1"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerInside"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/txtCVC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:hintTextAppearance="@style/grayFloatingLabel">
+
+                            <com.mind5.microcity.agenda.objects.view.BackAwareEditText
+                                android:id="@+id/edtCVC"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/securityCode"
+                                android:textCursorDrawable="@drawable/graycursor"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:maxLength="4"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imgCVC"
+                            android:layout_alignRight="@+id/txtCVC"
+                            android:layout_alignBottom="@+id/txtCVC"
+                            android:paddingBottom="10dp"
+                            android:src="@drawable/cvv"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerInside"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/spMonth"
+                            android:textSize="14sp"
+                            android:paddingRight="16dp"
+                            android:paddingLeft="6dp"
+                            android:id="@+id/txtExpiringDate"
+                            android:paddingBottom="10dp"
+                            android:layout_alignLeft="@+id/spMonth"
+                            android:text="@string/validity"/>
+
+                        <Spinner
+                            android:id="@+id/spMonth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/txtCVC"
+                            android:layout_toLeftOf="@+id/spYear"
+                            android:spinnerMode="dropdown"/>
+
+                        <Spinner
+                            android:id="@+id/spYear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/txtCVC"
+                            android:layout_alignParentRight="true"
+                            android:spinnerMode="dropdown"/>
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        app:hintTextAppearance="@style/grayFloatingLabel"
+                        android:layout_marginTop="24dp"
+                        android:layout_height="wrap_content">
+
+                        <com.mind5.microcity.agenda.objects.view.BackAwareEditText
+                            android:id="@+id/edtCPFCNPJ"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/CPFCNPJ"
+                            android:maxLength="18"
+                            android:textCursorDrawable="@drawable/graycursor"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:imeOptions="actionDone" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:paddingLeft="4dp"
+                        android:layout_marginTop="24dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="48dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txtBirthday"
+                            android:textSize="16dp"
+                            android:gravity="left"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.6"
+                            android:text="@string/birthdate"/>
+
+                        <Spinner
+                            android:id="@+id/spBirthday"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.4"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:spinnerMode="dropdown"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_content_save_white_36dp"
+        app:backgroundTint="@color/colorPrimary"
+        android:layout_gravity="bottom|end"/>
+
+</android.support.design.widget.CoordinatorLayout>

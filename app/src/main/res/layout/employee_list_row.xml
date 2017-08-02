@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:clickable="false"
+                android:descendantFocusability="blocksDescendants"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/txtEmployeeName"
+        android:layout_width="match_parent"
+        android:paddingTop="12dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_toLeftOf="@+id/chkEmployee"
+        android:text="Funcionário"
+        />
+
+    <TextView
+        android:id="@+id/txtStore"
+        android:layout_width="match_parent"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:layout_marginLeft="24dp"
+        android:paddingTop="4dp"
+        android:layout_below="@id/txtEmployeeName"
+        android:textSize="14dp"
+        android:layout_toLeftOf="@+id/chkEmployee"
+        android:text="Store name"
+        />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/chkEmployee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:theme="@style/checkbox"
+        />
+
+</RelativeLayout>

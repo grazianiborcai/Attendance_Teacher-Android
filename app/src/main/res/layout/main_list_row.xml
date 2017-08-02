@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+<!--
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/divider"
+        />
+-->
+
+    <TextView
+        android:id="@+id/txtMaterialName"
+        android:layout_width="wrap_content"
+        android:layout_alignTop="@+id/imgMaterial"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="Corte masculino"
+        />
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_below="@+id/txtMaterialName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:layout_alignLeft="@id/txtMaterialName"
+        android:layout_toLeftOf="@+id/imgMaterial"
+        android:maxLines="1"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:ellipsize="end"
+        android:text="Descrição do corte masculino, que poderá ultrapassar uma linha de extensão"
+        />
+
+<!--
+    <TextView
+        android:id="@+id/txtPrice"
+        android:layout_alignBottom="@+id/imgMaterial"
+        android:layout_toLeftOf="@+id/imgMaterial"
+        android:layout_alignLeft="@+id/txtMaterialName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left|bottom"
+        android:textSize="14dp"
+        android:text="R$ 59,00"
+        />
+-->
+    <ImageView
+        android:id="@+id/imgMaterial"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="42dp"
+        android:layout_height="70dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_content_std_image_42x70dp"
+        />
+
+</RelativeLayout>

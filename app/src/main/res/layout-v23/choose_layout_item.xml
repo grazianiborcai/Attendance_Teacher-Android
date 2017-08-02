@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="24dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:text="14:30"/>
+
+        <LinearLayout
+            android:layout_toRightOf="@+id/txtTime"
+            android:layout_width="match_parent"
+            android:layout_toLeftOf="@+id/btnAction"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:id="@+id/laySpinnersItems"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgStore"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_store_grey600_24dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtQtdStores"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:layout_marginRight="6dp"
+                    android:text="2"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/spStore"
+                        android:background="@null"
+                        android:layout_toLeftOf="@+id/imgArrow1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:id="@+id/imgArrow1"
+                        android:layout_width="28dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:scaleType="centerInside"
+                        android:adjustViewBounds="true"
+                        android:src="@android:drawable/ic_menu_more"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgEmployee"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_account_grey600_24dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtQtdEmployees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:layout_marginRight="6dp"
+                    android:text="3"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/spEmployee"
+                        android:background="@null"
+                        android:layout_toLeftOf="@+id/imgArrow2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:id="@+id/imgArrow2"
+                        android:layout_width="28dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:scaleType="centerInside"
+                        android:adjustViewBounds="true"
+                        android:src="@android:drawable/ic_menu_more"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/btnAction"
+            android:textColor="@android:color/white"
+            android:background="@drawable/red_button_background"
+            android:text="R$ 0,00"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:layout_marginRight="16dp"
+            android:layout_width="65dp"
+            android:layout_height="30dp"/>
+
+
+    </RelativeLayout>
+</FrameLayout>

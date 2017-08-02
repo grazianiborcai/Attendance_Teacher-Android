@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/app_bar_fragment"
+             android:id="@+id/layappbar"
+        />
+
+    <RelativeLayout
+        android:id="@+id/layHeader"
+        android:layout_below="@id/layappbar"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtMaterialName"
+            android:layout_width="wrap_content"
+            android:layout_alignTop="@+id/imgMaterial"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@android:color/black"
+            android:text="Corte masculino"
+            />
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_below="@+id/txtMaterialName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:layout_alignLeft="@id/txtMaterialName"
+            android:layout_toLeftOf="@+id/imgMaterial"
+            android:maxLines="5"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:ellipsize="end"
+            android:text="Descrição do corte masculino, que poderá ultrapassar uma linha de extensão"
+            />
+
+        <ImageView
+            android:id="@+id/imgMaterial"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="42dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_content_std_image_42x70dp"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_below="@id/layHeader"
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/divider" />
+
+    <com.mind5.microcity.agenda.objects.view.SmartScrollView
+        android:id="@+id/scroll_form"
+        android:layout_marginTop="24dp"
+        android:layout_below="@id/layHeader"
+        android:layout_above="@+id/pbLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/layUserChoice"
+                android:orientation="vertical"
+                android:paddingBottom="24dp"
+                android:layout_marginLeft="16dp"
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+            <include layout="@layout/empty_list"/>
+        </FrameLayout>
+    </com.mind5.microcity.agenda.objects.view.SmartScrollView>
+
+    <LinearLayout
+        android:id="@+id/pbLoading"
+        android:layout_width="match_parent"
+        android:paddingBottom="24dp"
+        android:visibility="gone"
+        android:paddingTop="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content">
+        <ProgressBar
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

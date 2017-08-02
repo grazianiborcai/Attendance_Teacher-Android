@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <include layout="@layout/app_bar_fragment" />
+
+    <TextView
+        android:id="@+id/txtEmptyList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:text="@string/emptyPros"
+        android:textColor="@color/colorPrimary"
+        />
+
+    <ListView
+        android:id="@+id/employeeView"
+        android:layout_below="@+id/appBar"
+        android:layout_above="@+id/employeeButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/divider"
+        android:clipToPadding="false"
+        android:paddingBottom="40dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:scrollbars="none"
+        android:dividerHeight="0.5px"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/employeeButtons"
+        style="?android:attr/buttonBarStyle"
+        android:gravity="right"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnClear"
+            android:text="@string/clear"
+            style="@style/Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/Button"
+            android:text="@string/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btnOk"
+            android:text="@string/ok"
+            android:layout_width="wrap_content"
+            style="@style/Button"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</RelativeLayout>
