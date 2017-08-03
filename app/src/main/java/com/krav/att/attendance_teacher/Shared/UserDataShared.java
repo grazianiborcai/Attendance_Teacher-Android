@@ -326,36 +326,56 @@ public class UserDataShared {
 				instance.bornDate = LocalDate.parse(aux);
 			}*/
             instance.peopleID = sp.getLong("userdata_peopleID", 0);
-            instance.countryID = sp.getString("userdata_countryID", countryID);
-            instance.name = sp.getString("userdata_name", name);
-            instance.birthDate = sp.getString("userdata_birthDate", birthDate.toString());
-            instance.enrollmentNumber = sp.getLong("userdata_enrollmentNumber", enrollmentNumber);
-            instance.gradeDate = sp.getString("userdata_gradeDate", gradeDate.toString());
-            instance.email = sp.getString("userdata_email", email);
-            instance.celphone = sp.getString("userdata_celphone", celphone);
-            instance.phone = sp.getString("userdata_phone", phone);
-            instance.address1 = sp.getString("userdata_address1", address1);
-            instance.address2 = sp.getString("userdata_address2", address2);
-            instance.postalCode = sp.getString("userdata_postalCode", postalCode);
-            instance.bloodType = sp.getString("userdata_bloodType", bloodType);
-            instance.allergy = sp.getString("userdata_allergy", allergy);
-            instance.allergyDesc = sp.getString("userdata_allergyDesc", allergyDesc);
-            instance.nextGradeExam = sp.getString("userdata_nextGradeExam", nextGradeExam.toString());
-            instance.whereOther = sp.getString("userdata_whereOther", whereOther);
-            instance.lookingOther = sp.getString("userdata_lookingOther", lookingOther);
-            instance.password = sp.getString("userdata_password", password);
-            instance.enrTypeID = sp.getInt("userdata_enrTypeID", enrTypeID);
-            instance.oAuth = sp.getString("userdata_oAuth", oAuth);
-            instance.oAuthDate = sp.getString("userdata_oAuthDate", oAuthDate.toString());
-            instance.userAgent = sp.getString("userdata_userAgent", userAgent);
-            instance.regionID = sp.getString("userdata_regionID", regionID);
-            instance.gradeID = sp.getInt("userdata_gradeID", gradeID);
-            instance.birthDateS = sp.getString("userdata_birthDateS", birthDateS);
-            instance.gradeDateS = sp.getString("userdata_gradeDateS", gradeDateS);
-            instance.nextGradeExamS = sp.getString("userdata_nextGradeExamS", nextGradeExamS);
-            instance.genderID = sp.getInt("userdata_genderID", genderID);
-            instance.whereID = sp.getInt("userdata_whereID", whereID);
-            instance.lookID = sp.getInt("userdata_lookID", lookID);
+            instance.countryID = sp.getString("userdata_countryID", "");
+            instance.name = sp.getString("userdata_name", "");
+            String aux = sp.getString("userdata_birthDate", "");
+            if (aux.isEmpty()) {
+                instance.birthDate = null;
+            } else {
+                instance.birthDate = LocalDate.parse(aux);
+            }
+            instance.enrollmentNumber = sp.getLong("userdata_enrollmentNumber", 0);
+            String aux2 = sp.getString("userdata_gradeDate", "");
+            if (aux2.isEmpty()) {
+                instance.gradeDate = null;
+            } else {
+                instance.gradeDate = LocalDate.parse(aux2);
+            }
+            instance.email = sp.getString("userdata_email", "");
+            instance.celphone = sp.getString("userdata_celphone", "");
+            instance.phone = sp.getString("userdata_phone", "");
+            instance.address1 = sp.getString("userdata_address1", "");
+            instance.address2 = sp.getString("userdata_address2", "");
+            instance.postalCode = sp.getString("userdata_postalCode", "");
+            instance.bloodType = sp.getString("userdata_bloodType", "");
+            instance.allergy = sp.getString("userdata_allergy", "");
+            instance.allergyDesc = sp.getString("userdata_allergyDesc", "");
+            String aux3 = sp.getString("userdata_nextGradeExam", "");
+            if (aux3.isEmpty()) {
+                instance.nextGradeExam = null;
+            } else {
+                instance.nextGradeExam = LocalDate.parse(aux3);
+            }
+            instance.whereOther = sp.getString("userdata_whereOther", "");
+            instance.lookingOther = sp.getString("userdata_lookingOther", "");
+            instance.password = sp.getString("userdata_password", "");
+            instance.enrTypeID = sp.getInt("userdata_enrTypeID", 0);
+            instance.oAuth = sp.getString("userdata_oAuth", "");
+            String aux4 = sp.getString("userdata_oAuthDate", "");
+            if (aux4.isEmpty()) {
+                instance.oAuthDate = null;
+            } else {
+                instance.oAuthDate = LocalDateTime.parse(aux4);
+            }
+            instance.userAgent = sp.getString("userdata_userAgent", "");
+            instance.regionID = sp.getString("userdata_regionID", "");
+            instance.gradeID = sp.getInt("userdata_gradeID", 0);
+            instance.birthDateS = sp.getString("userdata_birthDateS", "");
+            instance.gradeDateS = sp.getString("userdata_gradeDateS", "");
+            instance.nextGradeExamS = sp.getString("userdata_nextGradeExamS", "");
+            instance.genderID = sp.getInt("userdata_genderID", 0);
+            instance.whereID = sp.getInt("userdata_whereID", 0);
+            instance.lookID = sp.getInt("userdata_lookID", 0);
 		}
 		return instance;
 	}

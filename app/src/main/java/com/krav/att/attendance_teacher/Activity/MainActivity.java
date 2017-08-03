@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         TextView email = (TextView) v.findViewById(R.id.client_email);
         UserDataShared user = UserDataShared.carregar(this);
         name.setText(user.getName());
-        email.setText(user.getoAuth());
+        email.setText(user.getEmail());
     }
 
     @Override
