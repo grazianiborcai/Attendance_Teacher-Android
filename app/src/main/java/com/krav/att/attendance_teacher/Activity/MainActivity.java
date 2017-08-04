@@ -1,7 +1,9 @@
 package com.krav.att.attendance_teacher.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,11 +15,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.krav.att.attendance_teacher.Parcelable.People;
 import com.krav.att.attendance_teacher.R;
+import com.krav.att.attendance_teacher.Requests.AsyncTask.HttpRequestTask;
+import com.krav.att.attendance_teacher.Requests.FragmentRequest.LoginRequestFragment;
+import com.krav.att.attendance_teacher.Requests.Interface.OnTaskFinished;
 import com.krav.att.attendance_teacher.Shared.UserDataShared;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnTaskFinished {
+
+    private LoginRequestFragment mRequestFragment;
+    private UserDataShared user;
+    private NavigationView navigationView;
+    private boolean updateUser = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +55,39 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         /*ArrayList<People> pList = getIntent().getParcelableArrayListExtra(HttpRequestTask.RESULTS);*/
+        user = UserDataShared.carregar(this);
 
         setHeaderView(navigationView);
 
+            FragmentManager fm = getSupportFragmentManager();
+            mRequestFragment = (LoginRequestFragment) fm.findFragmentByTag(LoginRequestFragment.TAG_TASK_SELECT_USER);
+
+            // If the Fragment is non-null, then it is currently being
+            // retained across a configuration change.
+            if (mRequestFragment == null) {
+                mRequestFragment = LoginRequestFragment.newInstance(this);
+                fm.beginTransaction().add(mRequestFragment, LoginRequestFragment.TAG_TASK_SELECT_USER).commit();
+            }
+        updateUser = true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (updateUser && !getIntent().hasExtra("from_login_activity")) {
+            mRequestFragment.execute(user.getoAuth());
+            updateUser = !updateUser;
+        }
     }
 
     private void setHeaderView(NavigationView navView) {
         View v = navView.getHeaderView(0);
         TextView name = (TextView) v.findViewById(R.id.client_name);
         TextView email = (TextView) v.findViewById(R.id.client_email);
-        UserDataShared user = UserDataShared.carregar(this);
         name.setText(user.getName());
         email.setText(user.getEmail());
     }
@@ -115,5 +147,58 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void postExecute(Intent intent) {
+        try {
+            ArrayList<People> pList = intent.getParcelableArrayListExtra(HttpRequestTask.RESULTS);
+            People userData = pList.get(0);
+            user.setPeopleID(userData.getPeopleID());
+            user.setCountryID(userData.getCountryID());
+            user.setName(userData.getName());
+            user.setBirthDate(userData.getBirthDate());
+            user.setEnrollmentNumber(userData.getEnrollmentNumber());
+            user.setGradeDate(userData.getGradeDate());
+            user.setEmail(userData.getEmail());
+            user.setCelphone(userData.getCelphone());
+            user.setPhone(userData.getPhone());
+            user.setAddress1(userData.getAddress1());
+            user.setAddress2(userData.getAddress2());
+            user.setPostalCode(userData.getPostalCode());
+            user.setBloodType(userData.getBloodType());
+            user.setAllergy(userData.getAllergy());
+            user.setAllergyDesc(userData.getAllergyDesc());
+            user.setNextGradeExam(userData.getNextGradeExam());
+            user.setWhereOther(userData.getWhereOther());
+            user.setLookingOther(userData.getLookingOther());
+            user.setPassword(userData.getPassword());
+            user.setEnrTypeID(userData.getEnrTypeID());
+            user.setoAuth(userData.getoAuth());
+            user.setoAuthDate(userData.getoAuthDate());
+            user.setUserAgent(userData.getUserAgent());
+            user.setRegionID(userData.getRegionID());
+            user.setGradeID(userData.getGradeID());
+            user.setBirthDateS(userData.getBirthDateS());
+            user.setGradeDateS(userData.getGradeDateS());
+            user.setNextGradeExamS(userData.getNextGradeExamS());
+            user.setGenderID(userData.getGenderID());
+            user.setWhereID(userData.getWhereID());
+            user.setLookID(userData.getLookID());
+            user.save(this);
+            setHeaderView(navigationView);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void cancelled() {
+
+    }
+
+    @Override
+    public void animation(boolean b) {
+
     }
 }

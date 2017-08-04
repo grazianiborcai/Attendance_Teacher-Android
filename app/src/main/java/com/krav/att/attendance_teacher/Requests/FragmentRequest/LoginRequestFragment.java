@@ -8,7 +8,9 @@ import com.krav.att.attendance_teacher.Requests.Util.HTTPMethodEnum;
 public class LoginRequestFragment extends RequestFragment {
 
     public static final String TAG_TASK_LOGIN = "task_login";
-    private static final String URL = "People/loginPeople";
+    public static final String TAG_TASK_SELECT_USER = "select_user";
+    private static final String URL1 = "People/selectPeople";
+    private static final String URL2 = "People/loginPeople";
     public static final int ID_SERVICE = 1;
 
     public static LoginRequestFragment newInstance(OnTaskFinished callback) {
@@ -19,10 +21,10 @@ public class LoginRequestFragment extends RequestFragment {
     }
 
     public boolean execute (String authtoken) {
-        return execute(URL, HTTPMethodEnum.HTTP_GET, People.class, authtoken);
+        return execute(URL1, HTTPMethodEnum.HTTP_GET, People.class, authtoken);
     }
 
     public boolean execute (String email, String password) {
-        return execute(URL, HTTPMethodEnum.HTTP_GET, People.class, email, password);
+        return execute(URL2, HTTPMethodEnum.HTTP_GET, People.class, email, password);
     }
 }

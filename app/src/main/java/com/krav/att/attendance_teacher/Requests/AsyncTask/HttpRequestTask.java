@@ -50,7 +50,7 @@ public class HttpRequestTask extends AsyncTask<String, Void, Intent> {
 
     public static final String BASIC = "Basic ";
     public static final String AUTHORIZATION = "Authorization";
-    public static final String TOKEN = "token";
+    public static final String OAUTH = "oAuth";
     protected static final String SELECT_CODE = "selectCode";
     protected static final String UPDATE_CODE = "updateCode";
     protected static final String SELECT_MSG = "selectMessage";
@@ -66,8 +66,8 @@ public class HttpRequestTask extends AsyncTask<String, Void, Intent> {
     //used on loading images
     private static String mLastAuthtoken;
 
-    protected String mAuthtoken = null;
-    protected String token = null;
+    protected String basicAuth = null;
+    protected String oAuth = null;
     private String mEmail = null;
     private String mPassword = null;
     protected String mPath = null;
@@ -92,7 +92,7 @@ public class HttpRequestTask extends AsyncTask<String, Void, Intent> {
         mPath = path;
         mMethod = method;
         mClass = mclass;
-        mAuthtoken = authtoken;
+        oAuth = authtoken;
         mOnTaskFinished = onTaskFinished;
         identifying = ident;
     }
@@ -120,9 +120,9 @@ public class HttpRequestTask extends AsyncTask<String, Void, Intent> {
     }
 
     protected void defineToken() throws IOException {
-        if (mAuthtoken == null && !mEmail.isEmpty() && !mPassword.isEmpty()) {
+        if (mEmail != null && !mEmail.isEmpty() && mPassword != null && !mPassword.isEmpty()) {
             String login = mEmail + ":" + mPassword;
-            mAuthtoken = Base64.encodeToString(login.getBytes(), Base64.DEFAULT).replace("\n", "");
+            basicAuth = Base64.encodeToString(login.getBytes(), Base64.DEFAULT).replace("\n", "");
         }
 
         /*if (mAuthtoken!=null) {
@@ -140,9 +140,11 @@ public class HttpRequestTask extends AsyncTask<String, Void, Intent> {
         urlConnection.setRequestMethod(mMethod.toString());
 
         //filling up http header
-        if (mAuthtoken!=null) {
-            urlConnection.setRequestProperty(AUTHORIZATION, BASIC + mAuthtoken);
-            //urlConnection.setRequestProperty(TOKEN, token);
+        if (basicAuth!=null) {
+            urlConnection.setRequestProperty(AUTHORIZATION, BASIC + basicAuth);
+        }
+        if (oAuth!=null) {
+            urlConnection.setRequestProperty(OAUTH, oAuth);
         }
         //urlConnection.setRequestProperty("app", "client");
         //urlConnection.setRequestProperty("Accept-Encoding", "gzip");
@@ -231,7 +233,6 @@ public class HttpRequestTask extends AsyncTask<String, Void, Intent> {
 
                 data.putString(AccountManager.KEY_ACCOUNT_NAME, AttAccountGeneral.ACCOUNT_NAME);
                 data.putString(AccountManager.KEY_ACCOUNT_TYPE, AttAccountGeneral.ACCOUNT_TYPE);
-                data.putString(AccountManager.KEY_AUTHTOKEN, mAuthtoken);
                 data.putString(AccountManager.KEY_PASSWORD, AttAccountGeneral.ACCOUNT_PASSWORD);
 //s                }
 

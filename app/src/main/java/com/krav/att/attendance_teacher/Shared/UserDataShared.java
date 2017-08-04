@@ -282,9 +282,9 @@ public class UserDataShared {
         editor.putLong("userdata_peopleID", peopleID);
         editor.putString("userdata_countryID", countryID);
         editor.putString("userdata_name", name);
-        editor.putString("userdata_birthDate", birthDate.toString());
+        editor.putString("userdata_birthDate", birthDate == null ? "" : birthDate.toString());
         editor.putLong("userdata_enrollmentNumber", enrollmentNumber);
-        editor.putString("userdata_gradeDate", gradeDate.toString());
+        editor.putString("userdata_gradeDate", gradeDate == null ? "" : gradeDate.toString());
         editor.putString("userdata_email", email);
         editor.putString("userdata_celphone", celphone);
         editor.putString("userdata_phone", phone);
@@ -294,13 +294,13 @@ public class UserDataShared {
         editor.putString("userdata_bloodType", bloodType);
         editor.putString("userdata_allergy", allergy);
         editor.putString("userdata_allergyDesc", allergyDesc);
-        editor.putString("userdata_nextGradeExam", nextGradeExam.toString());
+        editor.putString("userdata_nextGradeExam", nextGradeExam == null ? "" : nextGradeExam.toString());
         editor.putString("userdata_whereOther", whereOther);
         editor.putString("userdata_lookingOther", lookingOther);
         editor.putString("userdata_password", password);
         editor.putInt("userdata_enrTypeID", enrTypeID);
         editor.putString("userdata_oAuth", oAuth);
-        editor.putString("userdata_oAuthDate", oAuthDate.toString());
+        editor.putString("userdata_oAuthDate", oAuthDate == null ? "" : oAuthDate.toString());
         editor.putString("userdata_userAgent", userAgent);
         editor.putString("userdata_regionID", regionID);
         editor.putInt("userdata_gradeID", gradeID);

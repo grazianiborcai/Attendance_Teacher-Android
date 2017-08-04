@@ -640,7 +640,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String accountPassword = intent.getStringExtra(AccountManager.KEY_PASSWORD);
         String accountType = intent.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE);
         ArrayList<People> pList = intent.getParcelableArrayListExtra(HttpRequestTask.RESULTS);
-        //String authtoken = intent.getStringExtra(AccountManager.KEY_AUTHTOKEN);
         String authtoken = pList.get(0).getoAuth();;
 
         AttAccountManagerHelper h = AttAccountManagerHelper.getInstance(this);
@@ -654,6 +653,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         Intent i = new Intent(this, MainActivity.class);
         i.putExtras(intent.getExtras());
+        i.putExtra("from_login_activity", true);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(i);
         finish();
