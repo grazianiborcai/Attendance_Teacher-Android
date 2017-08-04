@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,7 +19,9 @@ import android.widget.TextView;
 
 import com.krav.att.attendance_teacher.Parcelable.People;
 import com.krav.att.attendance_teacher.R;
+import com.krav.att.attendance_teacher.RecycleViewAdapter.ClassAdapter;
 import com.krav.att.attendance_teacher.Requests.AsyncTask.HttpRequestTask;
+import com.krav.att.attendance_teacher.Requests.FragmentRequest.ClassRequestFragment;
 import com.krav.att.attendance_teacher.Requests.FragmentRequest.LoginRequestFragment;
 import com.krav.att.attendance_teacher.Requests.Interface.OnTaskFinished;
 import com.krav.att.attendance_teacher.Shared.UserDataShared;
@@ -27,10 +31,16 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnTaskFinished {
 
-    private LoginRequestFragment mRequestFragment;
+    private LoginRequestFragment mLoginRequestFragment;
+    private ClassRequestFragment mClassRequestFragment;
+
     private UserDataShared user;
     private NavigationView navigationView;
     private boolean updateUser = false;
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,25 +73,52 @@ public class MainActivity extends AppCompatActivity
 
         setHeaderView(navigationView);
 
-            FragmentManager fm = getSupportFragmentManager();
-            mRequestFragment = (LoginRequestFragment) fm.findFragmentByTag(LoginRequestFragment.TAG_TASK_SELECT_USER);
+        FragmentManager fm = getSupportFragmentManager();
+        mLoginRequestFragment = (LoginRequestFragment) fm.findFragmentByTag(LoginRequestFragment.TAG_TASK_SELECT_USER);
+        mClassRequestFragment = (ClassRequestFragment) fm.findFragmentByTag(ClassRequestFragment.TAG_TASK_CLASS);
 
-            // If the Fragment is non-null, then it is currently being
-            // retained across a configuration change.
-            if (mRequestFragment == null) {
-                mRequestFragment = LoginRequestFragment.newInstance(this);
-                fm.beginTransaction().add(mRequestFragment, LoginRequestFragment.TAG_TASK_SELECT_USER).commit();
-            }
+        // If the Fragment is non-null, then it is currently being
+        // retained across a configuration change.
+        if (mLoginRequestFragment == null) {
+            mLoginRequestFragment = LoginRequestFragment.newInstance(this);
+            fm.beginTransaction().add(mLoginRequestFragment, LoginRequestFragment.TAG_TASK_SELECT_USER).commit();
+        }
+
+        // If the Fragment is non-null, then it is currently being
+        // retained across a configuration change.
+        if (mClassRequestFragment == null) {
+            mClassRequestFragment = ClassRequestFragment.newInstance(this);
+            fm.beginTransaction().add(mClassRequestFragment, ClassRequestFragment.TAG_TASK_CLASS).commit();
+        }
+
         updateUser = true;
+
+        ArrayList<People> pList = getIntent().getParcelableArrayListExtra(HttpRequestTask.RESULTS);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.classList);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new ClassAdapter(pList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         if (updateUser && !getIntent().hasExtra("from_login_activity")) {
-            mRequestFragment.execute(user.getoAuth());
+            mLoginRequestFragment.execute(user.getoAuth());
             updateUser = !updateUser;
         }
+        /*String params = "peopleID="+user.getPeopleID();
+        mClassRequestFragment.execute(user.getoAuth(), params);*/
     }
 
     private void setHeaderView(NavigationView navView) {
@@ -151,44 +188,48 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void postExecute(Intent intent) {
-        try {
-            ArrayList<People> pList = intent.getParcelableArrayListExtra(HttpRequestTask.RESULTS);
-            People userData = pList.get(0);
-            user.setPeopleID(userData.getPeopleID());
-            user.setCountryID(userData.getCountryID());
-            user.setName(userData.getName());
-            user.setBirthDate(userData.getBirthDate());
-            user.setEnrollmentNumber(userData.getEnrollmentNumber());
-            user.setGradeDate(userData.getGradeDate());
-            user.setEmail(userData.getEmail());
-            user.setCelphone(userData.getCelphone());
-            user.setPhone(userData.getPhone());
-            user.setAddress1(userData.getAddress1());
-            user.setAddress2(userData.getAddress2());
-            user.setPostalCode(userData.getPostalCode());
-            user.setBloodType(userData.getBloodType());
-            user.setAllergy(userData.getAllergy());
-            user.setAllergyDesc(userData.getAllergyDesc());
-            user.setNextGradeExam(userData.getNextGradeExam());
-            user.setWhereOther(userData.getWhereOther());
-            user.setLookingOther(userData.getLookingOther());
-            user.setPassword(userData.getPassword());
-            user.setEnrTypeID(userData.getEnrTypeID());
-            user.setoAuth(userData.getoAuth());
-            user.setoAuthDate(userData.getoAuthDate());
-            user.setUserAgent(userData.getUserAgent());
-            user.setRegionID(userData.getRegionID());
-            user.setGradeID(userData.getGradeID());
-            user.setBirthDateS(userData.getBirthDateS());
-            user.setGradeDateS(userData.getGradeDateS());
-            user.setNextGradeExamS(userData.getNextGradeExamS());
-            user.setGenderID(userData.getGenderID());
-            user.setWhereID(userData.getWhereID());
-            user.setLookID(userData.getLookID());
-            user.save(this);
-            setHeaderView(navigationView);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        if (People.class.toString().equals(intent.getStringExtra("request_class"))) {
+            try {
+                ArrayList<People> pList = intent.getParcelableArrayListExtra(HttpRequestTask.RESULTS);
+                People userData = pList.get(0);
+                user.setPeopleID(userData.getPeopleID());
+                user.setCountryID(userData.getCountryID());
+                user.setName(userData.getName());
+                user.setBirthDate(userData.getBirthDate());
+                user.setEnrollmentNumber(userData.getEnrollmentNumber());
+                user.setGradeDate(userData.getGradeDate());
+                user.setEmail(userData.getEmail());
+                user.setCelphone(userData.getCelphone());
+                user.setPhone(userData.getPhone());
+                user.setAddress1(userData.getAddress1());
+                user.setAddress2(userData.getAddress2());
+                user.setPostalCode(userData.getPostalCode());
+                user.setBloodType(userData.getBloodType());
+                user.setAllergy(userData.getAllergy());
+                user.setAllergyDesc(userData.getAllergyDesc());
+                user.setNextGradeExam(userData.getNextGradeExam());
+                user.setWhereOther(userData.getWhereOther());
+                user.setLookingOther(userData.getLookingOther());
+                user.setPassword(userData.getPassword());
+                user.setEnrTypeID(userData.getEnrTypeID());
+                user.setoAuth(userData.getoAuth());
+                user.setoAuthDate(userData.getoAuthDate());
+                user.setUserAgent(userData.getUserAgent());
+                user.setRegionID(userData.getRegionID());
+                user.setGradeID(userData.getGradeID());
+                user.setBirthDateS(userData.getBirthDateS());
+                user.setGradeDateS(userData.getGradeDateS());
+                user.setNextGradeExamS(userData.getNextGradeExamS());
+                user.setGenderID(userData.getGenderID());
+                user.setWhereID(userData.getWhereID());
+                user.setLookID(userData.getLookID());
+                user.save(this);
+                setHeaderView(navigationView);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } else if (People.class.toString().equals(intent.getStringExtra("request_class"))){
+
         }
     }
 

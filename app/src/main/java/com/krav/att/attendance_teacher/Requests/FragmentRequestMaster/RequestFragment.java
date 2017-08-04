@@ -106,9 +106,7 @@ public abstract class RequestFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         if (!TextUtils.isEmpty(inputParams)) {
             sb.append(inputParams);
-            sb.append("&");
         }
-        sb.append(DEFAULT_OWNER_PARAMETER);
         return sb.toString();
     }
 

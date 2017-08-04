@@ -229,6 +229,7 @@ public class HttpRequestTask extends AsyncTask<String, Void, Intent> {
                         } catch (Exception e) {
                         }
                     }
+                    data.putString("request_class", mClass.toString());
                 }
 
                 data.putString(AccountManager.KEY_ACCOUNT_NAME, AttAccountGeneral.ACCOUNT_NAME);
